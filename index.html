@@ -131,7 +131,10 @@ function tagB(t){var m={canon:['canon','b-canon'],rooted:['canon-rooted','b-root
 function chip(t){return '<span class="chip" style="background:'+CH[stat(t)]+';color:#fff">'+STATUS[stat(t)]+'</span>';}
 function star(t){return '<span class="star'+(fv[t.id]?' on':'')+'" data-fav="'+t.id+'">'+(fv[t.id]?'\u2605':'\u2606')+'</span>';}
 function bar(d){return '<span class="meta">'+d.techs.length+' techniques &middot; '+prog(d)+'% mastered</span><div class="bar"><i style="width:'+prog(d)+'%"></i></div>';}
-function card(d){return '<a class="scroll" href="#arch/'+d.id+'">'+sym(d)+'<h3>'+esc(d.name)+'</h3><p>'+esc(d.tagline)+'</p><div class="rel">'+esc(d.relNote)+'</div>'+bar(d)+'</a>';}
+function relNote(d){if(d.kind==='foundational')return 'one of the four foundational elements';
+ if(d.kind==='specialized')return 'a specialization of '+byId[d.parent].name;
+ return 'a rare ancient art, kin to the minerals of the earth';}
+function card(d){return '<a class="scroll" href="#arch/'+d.id+'">'+sym(d)+'<h3>'+esc(d.name)+'</h3><p>'+esc(d.tagline)+'</p><div class="rel">'+esc(relNote(d))+'</div>'+bar(d)+'</a>';}
 function openModal(d,t){
  curTech=t.id;openTech=t.id;
  var m=document.getElementById('modal');
