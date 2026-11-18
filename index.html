@@ -61,6 +61,7 @@ h2.group{font-variant:small-caps;letter-spacing:.14em;font-weight:normal;font-si
 .trow{display:flex;align-items:center;gap:10px;padding:11px 6px;border-bottom:1px solid rgba(120,95,40,.25);cursor:pointer;}
 .trow:hover{background:rgba(138,109,31,.08);}
 .trow .tn{flex:1;font-size:15px;}
+.trow img.thumb{width:46px;height:46px;object-fit:cover;border-radius:6px;border:1px solid var(--rule);flex:none;background:#d8c9a3;}
 .chip{font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap;}
 .star{font-size:17px;color:#b0a077;cursor:pointer;user-select:none;}
 .star.on{color:#c9a227;}
@@ -140,6 +141,7 @@ function openModal(d,t){
  var m=document.getElementById('modal');
  m.innerHTML='<div class="mask"><div class="sheet"><button class="close" onclick="closeModal()">Close</button>'+
  '<h3>'+esc(t.name)+'</h3><div class="statline">'+esc(d.name)+' &middot; '+TIER1[t.tier]+tagB(t.tag)+'</div>'+
+ '<img src="img/'+d.id+'_'+t.id+'.jpg" alt="Brush study of '+esc(t.name)+'" style="width:100%;border-radius:10px;margin-top:10px;display:block">'+
  '<div class="fl">Description</div><p>'+esc(t.desc)+'</p>'+
  '<div class="fl">Origins</div><p>'+esc(t.orig)+'</p>'+
  '<div class="fl">Known Practitioners</div><p>'+t.pract.map(esc).join(', ')+'</p>'+
@@ -190,7 +192,7 @@ function archView(id){curTech=null;openTech=null;var d=byId[id];if(!d){location.
  var par=d.parent?byId[d.parent]:null;var kids=(children[id]||[]).map(function(c){return byId[c]});
  var rows=function(tl){var ts=d.techs.filter(function(t){return t.tier===tl});if(!ts.length)return '';
   return '<div class="tier"><h3>'+TIER[tl]+'</h3>'+ts.map(function(t){return '<div class="trow" data-t="'+t.id+'">'+
-  '<span class="tn">'+esc(t.name)+tagB(t.tag)+'</span>'+chip(t)+star(t)+'</div>';}).join('')+'</div>';};
+  '<img class="thumb" loading="lazy" alt="" src="img/'+d.id+'_'+t.id+'.jpg">'+'<span class="tn">'+esc(t.name)+tagB(t.tag)+'</span>'+chip(t)+star(t)+'</div>';}).join('')+'</div>';};
  var relLine='';
  if(par)relLine='A specialization of <a href="#arch/'+par.id+'" style="text-decoration:underline">'+esc(par.name)+'</a>.';
  if(kids.length)relLine+=(relLine?' ':'')+'Its teachings extend into '+(kids.map(function(k){return '<a href="#arch/'+k.id+'" style="text-decoration:underline">'+esc(k.name)+'</a>'}).join(', '))+'.';
